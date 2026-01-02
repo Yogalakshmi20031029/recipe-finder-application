@@ -75,8 +75,6 @@ li {
 </div>
 
 <script>
-const API_KEY = "your api key";
-
 const params = new URLSearchParams(window.location.search);
 const recipeId = params.get("id");
 
@@ -85,53 +83,40 @@ if (!recipeId) {
         "<p>Invalid recipe selected.</p>";
 } else {
 
-fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_KEY}`)
+fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
 .then(res => res.json())
-.then(recipe => {
+.then(data => {
+    const meal = data.meals[0];
 
-    /* IMAGE */
-    const image = recipe.image ? `<img src="${recipe.image}">` : "";
-
-    /* INGREDIENTS */
-    let ingredientsHTML = "<p>No ingredients available.</p>";
-    if (recipe.extendedIngredients && recipe.extendedIngredients.length > 0) {
-        ingredientsHTML = "<ul>";
-        recipe.extendedIngredients.forEach(item => {
-            ingredientsHTML += `<li>${item.original}</li>`;
-        });
-        ingredientsHTML += "</ul>";
+    let ingredientsHTML = "<ul>";
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+        if (ingredient && ingredient.trim() !== "") {
+            ingredientsHTML += `<li>${ingredient} - ${measure}</li>`;
+        }
     }
+    ingredientsHTML += "</ul>";
 
-    /* STEPS */
-    let stepsHTML = "<p>No instructions available.</p>";
-    if (
-        recipe.analyzedInstructions &&
-        recipe.analyzedInstructions.length > 0 &&
-        recipe.analyzedInstructions[0].steps.length > 0
-    ) {
-        stepsHTML = "<ol>";
-        recipe.analyzedInstructions[0].steps.forEach(step => {
-            stepsHTML += `<li>${step.step}</li>`;
-        });
-        stepsHTML += "</ol>";
-    }
+    const stepsHTML = meal.strInstructions
+        .split(".")
+        .filter(step => step.trim() !== "")
+        .map(step => `<li>${step}</li>`)
+        .join("");
 
     document.getElementById("recipeDetails").innerHTML = `
-        <h2>${recipe.title || "Recipe"}</h2>
-        ${image}
-
+        <h2>${meal.strMeal}</h2>
+        <img src="${meal.strMealThumb}">
         <h3>Ingredients</h3>
         ${ingredientsHTML}
-
         <h3>Step-by-Step Preparation</h3>
-        ${stepsHTML}
+        <ol>${stepsHTML}</ol>
     `;
 })
 .catch(() => {
     document.getElementById("recipeDetails").innerHTML =
-        "<p>Unable to load recipe. API limit may be reached.</p>";
+        "<p>Unable to load recipe details.</p>";
 });
-
 }
 </script>
 
