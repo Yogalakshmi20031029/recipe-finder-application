@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Recipe Finder Application</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* BACKGROUND IMAGE */
+.intro-bg {
+    background-image: url("images/dinner.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+header {
+    background: rgba(44, 123, 229, 0.9);
+    color: white;
+    padding: 15px 40px;
+    text-align: center;
+}
+
+/* INTRO CONTENT */
+.intro {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 50px 60px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    max-width: 500px;
+}
+
+.intro-box h1 {
+    font-size: 40px;
+    color: #2c7be5;
+    margin-bottom: 10px;
+}
+
+.intro-box h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.intro-box p {
+    color: #555;
+    margin-bottom: 35px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.intro-box a {
+    display: inline-block;
+    padding: 14px 30px;
+    background: #2c7be5;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.intro-box a:hover {
+    background: #1a5fc4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .intro-box {
+        padding: 40px 25px;
+        margin: 20px;
+    }
+
+    .intro-box h1 {
+        font-size: 32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="intro-bg">
+
+    <header>
+        <h2>🍽 Recipe Finder Application</h2>
+    </header>
+
+    <section class="intro">
+        <div class="intro-box">
+            <h1>Recipe Finder</h1>
+            <h2>Web Application</h2>
+
+            <p>
+                Find delicious recipes using the ingredients you already have.
+                Simple, fast, and perfect for everyday cooking.
+            </p>
+
+            <a href="index.html">Enter Application</a>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
