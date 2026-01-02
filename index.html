@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Recipe Finder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+/* HEADER */
+header {
+    background: #2c7be5;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    padding: 60px 40px;
+    background: white;
+    align-items: center;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h1 {
+    font-size: 36px;
+}
+
+.hero-text p {
+    color: #555;
+}
+
+form {
+    margin-top: 20px;
+}
+
+input {
+    padding: 12px;
+    width: 250px;
+}
+
+button {
+    padding: 12px 20px;
+    background: #2c7be5;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.hero img {
+    width: 150%;
+    max-width: 1000px;
+    border-radius: 50px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>🍽 Recipe Finder</h2>
+    <a href="javascript:history.back()" class="back-btn">⬅ Back</a>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Find Recipes Using Ingredients You Have</h1>
+        <p>Enter one ingredient and discover delicious recipes instantly.</p>
+
+        <form action="recipes.html" method="GET">
+            <input type="text" name="ingredient" placeholder="Enter ingredient" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <img src="images/hero.jpg" alt="Food Image">
+</section>
+
+</body>
+</html>
