@@ -68,31 +68,35 @@ header {
 <div class="grid" id="recipeList"></div>
 
 <script>
-const API_KEY = "your api key";
-
 const params = new URLSearchParams(window.location.search);
 const ingredient = params.get("ingredient");
 
-fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=8&apiKey=${API_KEY}`)
+fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
 .then(res => res.json())
 .then(data => {
     const list = document.getElementById("recipeList");
 
-    data.forEach(recipe => {
+    if (!data.meals) {
+        list.innerHTML = "<p>No recipes found.</p>";
+        return;
+    }
+
+    data.meals.forEach(meal => {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-            <img src="${recipe.image}">
-            <h3>${recipe.title}</h3>
+            <img src="${meal.strMealThumb}">
+            <h3>${meal.strMeal}</h3>
         `;
         card.onclick = () => {
-            window.location.href = `recipe-details.html?id=${recipe.id}`;
+            window.location.href = `recipe-details.html?id=${meal.idMeal}`;
         };
         list.appendChild(card);
     });
 })
-.catch(() => alert("API error or daily limit reached"));
+.catch(() => alert("Unable to load recipes"));
 </script>
+
 
 </body>
 </html>
